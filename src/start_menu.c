@@ -624,7 +624,7 @@ static bool32 InitStartMenuStep(void)
     case 3:
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
-        else if (InBattlePyramid())
+        else if (InBattlePyramid_())
             ShowPyramidFloorWindow();
         sInitStartMenuData[0]++;
         break;
@@ -799,7 +799,7 @@ static bool8 StartMenuPokemonCallback(void)
         return TRUE;
     }
 
-    if (!GetSafariZoneFlag() && !InBattlePyramid() && gSaveBlock2Ptr->playTimeSeconds == 0) 
+    if (!GetSafariZoneFlag() && !InBattlePyramid_() && gSaveBlock2Ptr->playTimeSeconds == 0) 
     {
         RemoveExtraStartMenuWindows();
         ShowTimeWindow();
