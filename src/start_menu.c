@@ -560,7 +560,7 @@ static void RemoveExtraStartMenuWindows(void)
         //CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
         RemoveWindow(sSafariBallsWindowId);
     }
-    else if (InBattlePyramid())
+    else if (InBattlePyramid_())
     {
         ClearStdWindowAndFrameToTransparent(sBattlePyramidFloorWindowId, FALSE);
         RemoveWindow(sBattlePyramidFloorWindowId);
