@@ -54,6 +54,7 @@
 #include "trainer.h"
 #include "trainer_hill.h"
 #include "util.h"
+#include "variant_colours.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
@@ -5390,9 +5391,18 @@ const u16 *GetMonFrontSpritePal(struct Pokemon *mon)
     return GetMonSpritePalFromSpeciesAndPersonalityIsEgg(species, isShiny, personality, isEgg);
 }
 
-const u16 *GetMonSpritePalFromSpeciesAndPersonality(enum Species species, bool32 isShiny, u32 personality)
+const u16 *GetMonSpritePalFromSpeciesInternal(enum Species species, bool32 isShiny, bool32 isFemale)
 {
-    return GetMonSpritePalFromSpeciesIsEgg(species, isShiny, IsPersonalityFemale(species, personality), FALSE);
+    return GetMonSpritePalFromSpeciesIsEgg(species, isShiny, isFemale, FALSE);
+}
+
+const u16 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
+{
+    const u16 *base = GetMonSpritePalFromSpeciesInternal(species, isShiny, IsPersonalityFemale(species, personality));
+    static u16 sVariantPal[16];
+    CpuCopy16(base, sVariantPal, sizeof(sVariantPal));
+    ApplyMonSpeciesVariantToPaletteBuffer(species, isShiny, personality, sVariantPal);
+    return sVariantPal;
 }
 
 const u16 *GetMonSpritePalFromSpeciesAndPersonalityIsEgg(enum Species species, bool32 isShiny, u32 personality, bool32 isEgg)
@@ -5400,9 +5410,13 @@ const u16 *GetMonSpritePalFromSpeciesAndPersonalityIsEgg(enum Species species, b
     return GetMonSpritePalFromSpeciesIsEgg(species, isShiny, IsPersonalityFemale(species, personality), isEgg);
 }
 
-const u16 *GetMonSpritePalFromSpecies(enum Species species, bool32 isShiny, bool32 isFemale)
+const u16 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
 {
-    return GetMonSpritePalFromSpeciesIsEgg(species, isShiny, isFemale, FALSE);
+    const u16 *base = GetMonSpritePalFromSpeciesInternal(species, isShiny, isFemale);
+    static u16 sVariantPal[16];
+    CpuCopy16(base, sVariantPal, sizeof(sVariantPal));
+    ApplyMonSpeciesVariantToPaletteBuffer(species, isShiny, 0x00000000, sVariantPal);
+    return sVariantPal;
 }
 
 const u16 *GetMonSpritePalFromSpeciesIsEgg(enum Species species, bool32 isShiny, bool32 isFemale, bool32 isEgg)

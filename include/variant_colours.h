@@ -75,29 +75,31 @@ void ApplyMonSpeciesVariantToPaletteBuffer(u32 species, bool8 shiny, u32 PID, u1
 #define DEFAULT_SPECIES_VARIANT \
   {                             \
       PAL1(1, 15),              \
-      HCL1(10, 0, 0, FALSE),    \
+      HCL1(10, 0, 0, TRUE),    \
   }
 
 static const struct SpeciesVariant gSpeciesVariants[NUM_SPECIES] = {
     [SPECIES_POOCHYENA] = {
         PAL1(1, 5),
-        HCL1(0, 25, 5, FALSE),
+        HCL1(45, 10, 10, FALSE),
+        PAL2(8, 3),
+        HCL2(45, 10, 10, TRUE)
     },
     [SPECIES_MIGHTYENA] = {
         PAL1(1, 5),
-        HCL1(0, 25, 5, FALSE),
+        HCL1(45, 10, 10, FALSE),
     },
     [SPECIES_ZIGZAGOON] = {
         PAL1(5, 8),
-        HCL1(10, 25, 5, FALSE),
+        HCL1(90, 25, 25, FALSE),
     },
     [SPECIES_LINOONE] = {
         PAL1(1, 3),
-        HCL1(10, 25, 5, FALSE),
+        HCL1(90, 25, 25, FALSE),
     },
     [SPECIES_WURMPLE] = {
         PAL1(1, 4),
-        HCL1(30, 5, 0, TRUE),
+        HCL1(10, 5, 0, TRUE),
     },
     [SPECIES_SMEARGLE] = {
         PAL1(8, 6),
@@ -110,5 +112,9 @@ static const struct SpeciesVariant gSpeciesVariants[NUM_SPECIES] = {
       HCL1(30, 25, 0, TRUE),
       PAL2(1, 5),
       HCL2(0, 0, 10, FALSE),
+    },
+        [SPECIES_TREECKO] = {
+        PAL1(1, 6),
+        HCL1(60, 0, 10, FALSE),  
     },
 };
